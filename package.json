@@ -1,0 +1,33 @@
+{
+  "name": "api_2dv50e",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "source .env && nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viktorodman/api_2DV50E.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viktorodman/api_2DV50E/issues"
+  },
+  "homepage": "https://github.com/viktorodman/api_2DV50E#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "json2csv": "^5.0.7",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "pug": "^3.0.2",
+    "request": "^2.88.2"
+  }
+}
