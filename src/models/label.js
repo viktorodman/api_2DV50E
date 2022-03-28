@@ -1,3 +1,5 @@
+import { mysqlQuery } from "../utils/database.js";
+
 export default class LabelModel {
     async upsert(labels) {
         if (!labels || !labels.length) return;

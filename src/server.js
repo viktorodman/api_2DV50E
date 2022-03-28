@@ -2,6 +2,7 @@ import express from "express";
 import IndexRouter from "./routes/index.js";
 import IndexRouterV1 from "./routes/v1/index.js";
 import cors from 'cors'
+import morgan from "morgan";
 export default class Server {
     _app = express()
     _baseRouter = express.Router()
@@ -12,15 +13,16 @@ export default class Server {
     constructor() {}
 
     run() {
-        this._setUpRoutes()
+        this._app.use(morgan('dev'))
         this._setUpMiddlewares()
+        this._setUpRoutes()
         this._setUpViewEngine()
         this._listen()
     }
 
     _setUpRoutes() {
-        this._app.use(this._indexRouterV1.router)
-        this._app.use(this._indexRouter.router)
+        this._app.use('/v1', this._indexRouterV1.router)
+        this._app.use('/', this._indexRouter.router)
     }
 
     _setUpMiddlewares() {

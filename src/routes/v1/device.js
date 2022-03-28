@@ -15,7 +15,7 @@ export default class DeviceRouter {
 
     initializeRouter() {
         this._router.get('/user/:userId', 
-            (req, res) => this._authMiddleware.verifyToken(req, res),
+            /* (req, res) => this._authMiddleware.verifyToken(req, res), */
             (req, res) => this._controller.getDevices(req, res)
         )
     }

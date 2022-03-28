@@ -1,3 +1,5 @@
+import { mysqlQuery } from "../utils/database.js";
+
 export default class RequestModel {
     
     async upsert(request) {

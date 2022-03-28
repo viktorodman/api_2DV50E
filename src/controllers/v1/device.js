@@ -1,5 +1,16 @@
+import DeviceModel from "../../models/device.js";
+
 export default class DeviceController {
+    _deviceModel = new DeviceModel()
+
     async getDevices(req, res) {
-        res.status(200).json({ message: 'From devices' })
+        const { userId, type } = req.params
+        const { verbose } = req.query
+
+        let devices
+        if (userId) {
+            devices = await this._deviceModel.get({ userId });
+        }
+        res.send(devices)
     }
 }

@@ -2,6 +2,7 @@ import express from "express";
 import AuthRouter from "./auth.js";
 import DataRouter from "./data.js";
 import DeviceRouter from "./device.js";
+import GraphRouter from "./graph.js";
 import LabelRouter from "./label.js";
 import RequestRouter from "./request.js";
 import UserRouter from "./user.js";
@@ -13,6 +14,7 @@ export default class IndexRouterV1 {
     _labelRouter = new LabelRouter()
     _requestRouter = new RequestRouter()
     _userRouter = new UserRouter()
+    _graphRouter = new GraphRouter()
     _router = express.Router()
 
     constructor() {
@@ -28,5 +30,6 @@ export default class IndexRouterV1 {
         this._router.use('/label', this._labelRouter.router)
         this._router.use('/request', this._requestRouter.router)
         this._router.use('/user', this._userRouter.router)
+        this._router.use('/graph', this._graphRouter.router)
     }
 }
