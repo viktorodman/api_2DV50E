@@ -1,4 +1,5 @@
 import express from "express";
+import AlarmRouter from "./alarm.js";
 import AuthRouter from "./auth.js";
 import DataRouter from "./data.js";
 import DeviceRouter from "./device.js";
@@ -15,6 +16,7 @@ export default class IndexRouterV1 {
     _requestRouter = new RequestRouter()
     _userRouter = new UserRouter()
     _graphRouter = new GraphRouter()
+    _alarmRouter = new AlarmRouter()
     _router = express.Router()
 
     constructor() {
@@ -31,5 +33,6 @@ export default class IndexRouterV1 {
         this._router.use('/request', this._requestRouter.router)
         this._router.use('/user', this._userRouter.router)
         this._router.use('/graph', this._graphRouter.router)
+        this._router.use('/alarm', this._alarmRouter.router)
     }
 }

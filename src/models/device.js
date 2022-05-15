@@ -22,7 +22,10 @@ export default class DeviceModel {
     }
 
     async get({ deviceId, userId }) {
+        /* console.log("firstthingsfirst")
+        return "xd" */
         let where = ``
+        console.log("ja",userId)
         if (deviceId) where += ` AND id = :deviceId`
         if (userId) where += ` AND id IN(select device_id AS id FROM user_device WHERE user_id = :userId)`
         return await mysqlQuery(`
@@ -30,5 +33,19 @@ export default class DeviceModel {
         where true
         ${where};
         `, { deviceId, userId })
+    }
+
+    async updateLatLng({ lat, lng, deviceId }) {
+        let where = ``
+
+        return await mysqlQuery(`
+        UPDATE device
+        SET
+        lat = :lat,
+        lng = :lng
+        WHERE
+        id = :deviceId;`
+        , { lat, lng, deviceId })
+
     }
 }

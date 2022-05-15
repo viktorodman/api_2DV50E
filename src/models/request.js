@@ -13,10 +13,24 @@ export default class RequestModel {
         )
     }
 
-    async get({ deviceId, deviceIds }) {
+    async get({ deviceId, deviceIds, startDate, endDate }) {
         let where = ``
         if (deviceId) where += ` AND device_id = :deviceId`
         if (deviceIds?.length) where += ` AND device_id IN(:deviceIds)`
+        console.log('first')
+
+
+        if (startDate && endDate) {
+            console.log('1')
+            where += ` AND date(created) between date(${startDate}) and date(${endDate})`
+        } else if (startDate) {
+            console.log('2')
+            where += ` AND date(created) >= date(${startDate})`
+        } else if (endDate){
+            console.log('3')
+            where += ` AND date(created) <= date(${endDate})`
+        }
+
         const requests = await mysqlQuery(`
         SELECT * FROM request
         where true

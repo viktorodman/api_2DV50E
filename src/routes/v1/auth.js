@@ -13,5 +13,9 @@ export default class AuthRouter {
 
     initializeRouter() {
         this._router.post('/', (req, res) => this._controller.setToken(req, res))
+
+        this._router.get('/', (req, res) => this._controller.isAuthenticated(req, res))
+
+        this._router.post('/login', (req, res) => this._controller.login(req, res))
     }
 }

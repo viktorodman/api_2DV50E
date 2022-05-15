@@ -10,6 +10,9 @@ export default class RequestController {
 
     async getRequests(req, res) {
         const { userId, type, deviceId } = req.params
+        const { startDate, endDate } = req.query
+        
+
         let { deviceIds = [] } = req.params;
         let requests
         if (userId) {
@@ -18,9 +21,10 @@ export default class RequestController {
         }
         if (deviceId) deviceIds.push(deviceId)
         if (deviceIds) {
-            const res = await this._requestModel.get({ deviceIds });
+            const res = await this._requestModel.get({ deviceIds, startDate, endDate });
             requests = res
         }
+        console.log(requests)
         if (type && deviceId) {
             if (type === 'csv') {
                 let csvData
@@ -52,6 +56,12 @@ export default class RequestController {
 
     getDeviceDataAsCSV (deviceIds, name) {
         const result = []
+        console.log("device ids", deviceIds)
+        if (deviceIds.length < 1) {
+            console.log("HEJ")
+            return [{error: "No data was found for the selected "}]
+        }
+        
         for (const device of deviceIds) {
             if (device.decoded_payload) {
                 let reqData = this.flattenObject(device.decoded_payload)
