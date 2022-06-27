@@ -19,8 +19,8 @@ export default class DeviceRouter {
             (req, res) => this._controller.getDevices(req, res)
         )
 
-        this._router.post('/:deviceId/latLng',
-            (req, res) =>  this._controller.changeLatLng(req, res)
+        this._router.post('/:deviceId/info',
+            (req, res) =>  this._controller.updateInfo(req, res)
         )
     }
 }

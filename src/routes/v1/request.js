@@ -21,5 +21,8 @@ export default class RequestRouter {
             /* (req, res) => this._authMiddleware.verifyToken(req, res), */
             (req, res) => this._controller.getRequests(req, res)
         )
+        this._router.get('/test/:deviceId', 
+            (req, res) => this._controller.test(req, res)
+        )
     }
 }

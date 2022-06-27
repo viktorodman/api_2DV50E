@@ -1,4 +1,5 @@
 import DeviceModel from "../../models/device.js";
+import { translateDeviceData } from "../../utils/fiwareConfig.js";
 
 export default class DeviceController {
     _deviceModel = new DeviceModel()
@@ -14,22 +15,24 @@ export default class DeviceController {
             console.log(devices)
         }
 
+        translateDeviceData(devices)
+
         console.log("nuså",userId)
 
         res.send(devices)
     }
 
-    async changeLatLng(req, res) {
+    async updateInfo(req, res) {
         const { deviceId } = req.params
-        const { lat, lng } = req.body
+        const { lat, lng, desc } = req.body
 
-        if (!lat || !lng) {
+        if (!lat || !lng || !desc) {
             res.status(400).json()
         }
 
-        
+        console.log("first", desc, lat, lng)
 
-        await this._deviceModel.updateLatLng({lat, lng, deviceId})
+        await this._deviceModel.updateInfo({lat, lng, desc, deviceId})
 
         res.status(200).json()
     }

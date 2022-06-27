@@ -2,11 +2,28 @@ import { transforms } from "json2csv";
 import { Parser} from "json2csv";
 import DeviceModel from "../../models/device.js";
 import RequestModel from "../../models/request.js";
+import { translateRequestData } from "../../utils/fiwareConfig.js";
 
 
 export default class RequestController {
     _requestModel = new RequestModel()
     _deviceModel = new DeviceModel()
+
+    async test(req, res) {
+        try {
+            const { deviceId } = req.params
+    
+            const device = (await this._deviceModel.get({deviceId}))
+            const requests = await this._requestModel.get({deviceId})
+            const data = translateRequestData(device[0], requests)
+    
+            res.status(200).json(data)
+            /* res.status(200).json("HEJSAN") */
+        } catch (error) {
+            console.log(error)
+            res.status(404).json({error: "cant find device"})
+        }
+    }
 
     async getRequests(req, res) {
         const { userId, type, deviceId } = req.params
