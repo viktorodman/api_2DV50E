@@ -2,7 +2,7 @@ import mySql from "mysql2/promise.js"
 
 const getConnection = async () => {
     const config = {
-        database: 'iot_net',
+        database: 'iot_net2',
         password: process.env.MYSQL_PASSWORD,
         host: process.env.MYSQL_HOST,
         user: process.env.MYSQL_USERNAME,

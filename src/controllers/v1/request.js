@@ -12,9 +12,12 @@ export default class RequestController {
     async test(req, res) {
         try {
             const { deviceId } = req.params
+            const { startDate, endDate } = req.query
+
+            console.log(startDate, endDate)
     
             const device = (await this._deviceModel.get({deviceId}))
-            const requests = await this._requestModel.get({deviceId})
+            const requests = await this._requestModel.get({deviceId, startDate, endDate})
             const data = translateRequestData(device[0], requests)
     
             res.status(200).json(data)
@@ -28,6 +31,8 @@ export default class RequestController {
     async getRequests(req, res) {
         const { userId, type, deviceId } = req.params
         const { startDate, endDate } = req.query
+
+        console.log(startDate, endDate)
         
 
         let { deviceIds = [] } = req.params;

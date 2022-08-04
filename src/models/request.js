@@ -22,14 +22,17 @@ export default class RequestModel {
 
         if (startDate && endDate) {
             console.log('1')
-            where += ` AND date(created) between date(${startDate}) and date(${endDate})`
+            where += ` AND date(created) between date('${startDate}') and date('${endDate}')`
         } else if (startDate) {
             console.log('2')
-            where += ` AND date(created) >= date(${startDate})`
+            where += ` AND date(created) >= date('${startDate}')`
         } else if (endDate){
             console.log('3')
-            where += ` AND date(created) <= date(${endDate})`
+            where += ` AND date(created) <= date('${endDate}')`
         }
+
+        console.log("WHERE!")
+        console.log(where)
 
         const requests = await mysqlQuery(`
         SELECT * FROM request
